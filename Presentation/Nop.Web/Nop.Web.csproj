@@ -1,0 +1,270 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net461</TargetFramework>
+    <Copyright>Copyright © Nop Solutions, Ltd</Copyright>
+    <Company>Nop Solutions, Ltd</Company>
+    <Authors>Nop Solutions, Ltd</Authors>
+    <Version>4.0.0.0</Version>
+    <Description>Nop.Web is also an MVC web application project, a presentation layer for public store and admin area.</Description>
+    <PackageLicenseUrl>http://www.nopcommerce.com/licensev3.aspx</PackageLicenseUrl>
+    <PackageProjectUrl>http://www.nopcommerce.com/</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/nopSolutions/nopCommerce</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Abstractions" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Composite" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Physical" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Libraries\Nop.Core\Nop.Core.csproj" />
+    <ProjectReference Include="..\..\Libraries\Nop.Data\Nop.Data.csproj" />
+    <ProjectReference Include="..\..\Libraries\Nop.Services\Nop.Services.csproj" />
+    <ProjectReference Include="..\Nop.Web.Framework\Nop.Web.Framework.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- We copy the entire \App_Data directory. But we ignore JSON files and data protection keys  -->
+    <Content Include="App_Data\**" CopyToPublishDirectory="PreserveNewest" Exclude="App_Data\*.json" />
+    <Content Update="App_Data\*.json" CopyToPublishDirectory="Never" />
+    <Content Update="App_Data\DataProtectionKeys\*.xml" CopyToPublishDirectory="Never" />
+    <Compile Remove="obj\**" />
+
+    <Compile Remove="Plugins\**" />
+
+    <Content Remove="obj\**" />
+
+    <EmbeddedResource Remove="obj\**" />
+    <EmbeddedResource Remove="Plugins\**" />
+    <None Remove="obj\**" />
+    <None Remove="Plugins\**" />
+
+    <!-- We copy the entire \Plugins and \Themes directories.
+	    But we ignore cshtml and JSON files to avoid "Duplicate 'Content' items were included" error during publishing.
+	    We also can use "CheckForDuplicateItemsContinueOnError" as per https://github.com/dotnet/sdk/blob/master/src/Tasks/Microsoft.NET.Build.Tasks/build/Microsoft.NET.Sdk.DefaultItems.targets -->
+    <Content Include="Plugins\**" CopyToPublishDirectory="PreserveNewest" Exclude="Plugins\**\*.config;Plugins\**\*.cshtml;Plugins\**\*.json" />
+    <Content Include="Themes\**" CopyToPublishDirectory="PreserveNewest" Exclude="Themes\**\*.config;Themes\**\*.cshtml;Themes\**\*.json" />
+
+    <!-- We copy the \Logs directory -->
+    <Content Include="Logs\**" CopyToPublishDirectory="PreserveNewest" />
+    <None Remove="Themes\SimplexTheme\Content\images\logo.jpeg" />
+    <None Include="Themes\DefaultClean\Views\Shared\Head.cshtml" />
+    <None Include="Themes\DefaultClean\Views\_ViewImports.cshtml" />
+    <None Include="Themes\Mybags\theme.config" />
+    <None Include="Themes\Mybags\Views\Blog\BlogMonths.cshtml" />
+    <None Include="Themes\Mybags\Views\Blog\BlogPost.cshtml" />
+    <None Include="Themes\Mybags\Views\Blog\BlogTags.cshtml" />
+    <None Include="Themes\Mybags\Views\Blog\List.cshtml" />
+    <None Include="Themes\Mybags\Views\Boards\ActiveDiscussions.cshtml" />
+    <None Include="Themes\Mybags\Views\Boards\ActiveDiscussionsSmall.cshtml" />
+    <None Include="Themes\Mybags\Views\Boards\CustomerForumSubscriptions.cshtml" />
+    <None Include="Themes\Mybags\Views\Boards\Forum.cshtml" />
+    <None Include="Themes\Mybags\Views\Boards\ForumBreadcrumb.cshtml" />
+    <None Include="Themes\Mybags\Views\Boards\ForumGroup.cshtml" />
+    <None Include="Themes\Mybags\Views\Boards\Index.cshtml" />
+    <None Include="Themes\Mybags\Views\Boards\LastPost.cshtml" />
+    <None Include="Themes\Mybags\Views\Boards\PostCreate.cshtml" />
+    <None Include="Themes\Mybags\Views\Boards\PostEdit.cshtml" />
+    <None Include="Themes\Mybags\Views\Boards\Search.cshtml" />
+    <None Include="Themes\Mybags\Views\Boards\Topic.cshtml" />
+    <None Include="Themes\Mybags\Views\Boards\TopicCreate.cshtml" />
+    <None Include="Themes\Mybags\Views\Boards\TopicEdit.cshtml" />
+    <None Include="Themes\Mybags\Views\Boards\TopicMove.cshtml" />
+    <None Include="Themes\Mybags\Views\Boards\_ActiveTopics.cshtml" />
+    <None Include="Themes\Mybags\Views\Boards\_CreateUpdatePost.cshtml" />
+    <None Include="Themes\Mybags\Views\Boards\_CreateUpdateTopic.cshtml" />
+    <None Include="Themes\Mybags\Views\Boards\_ForumGroup.cshtml" />
+    <None Include="Themes\Mybags\Views\Boards\_ForumHeader.cshtml" />
+    <None Include="Themes\Mybags\Views\Boards\_ForumPost.cshtml" />
+    <None Include="Themes\Mybags\Views\Boards\_SearchBox.cshtml" />
+    <None Include="Themes\Mybags\Views\Catalog\CategoryNavigation.cshtml" />
+    <None Include="Themes\Mybags\Views\Catalog\CategoryTemplate.ProductsInGridOrLines.cshtml" />
+    <None Include="Themes\Mybags\Views\Catalog\HomepageCategories.cshtml" />
+    <None Include="Themes\Mybags\Views\Catalog\ManufacturerAll.cshtml" />
+    <None Include="Themes\Mybags\Views\Catalog\ManufacturerNavigation.cshtml" />
+    <None Include="Themes\Mybags\Views\Catalog\ManufacturerTemplate.ProductsInGridOrLines.cshtml" />
+    <None Include="Themes\Mybags\Views\Catalog\PopularProductTags.cshtml" />
+    <None Include="Themes\Mybags\Views\Catalog\ProductsByTag.cshtml" />
+    <None Include="Themes\Mybags\Views\Catalog\ProductTagsAll.cshtml" />
+    <None Include="Themes\Mybags\Views\Catalog\Search.cshtml" />
+    <None Include="Themes\Mybags\Views\Catalog\SearchBox.cshtml" />
+    <None Include="Themes\Mybags\Views\Catalog\TopMenu.cshtml" />
+    <None Include="Themes\Mybags\Views\Catalog\Vendor.cshtml" />
+    <None Include="Themes\Mybags\Views\Catalog\VendorAll.cshtml" />
+    <None Include="Themes\Mybags\Views\Catalog\VendorNavigation.cshtml" />
+    <None Include="Themes\Mybags\Views\Catalog\_CatalogSelectors.cshtml" />
+    <None Include="Themes\Mybags\Views\Catalog\_FilterPriceBox.cshtml" />
+    <None Include="Themes\Mybags\Views\Catalog\_FilterSpecsBox.cshtml" />
+    <None Include="Themes\Mybags\Views\Checkout\BillingAddress.cshtml" />
+    <None Include="Themes\Mybags\Views\Checkout\CheckoutProgress.cshtml" />
+    <None Include="Themes\Mybags\Views\Checkout\Completed.cshtml" />
+    <None Include="Themes\Mybags\Views\Checkout\Confirm.cshtml" />
+    <None Include="Themes\Mybags\Views\Checkout\OnePageCheckout.cshtml" />
+    <None Include="Themes\Mybags\Views\Checkout\OpcBillingAddress.cshtml" />
+    <None Include="Themes\Mybags\Views\Checkout\OpcConfirmOrder.cshtml" />
+    <None Include="Themes\Mybags\Views\Checkout\OpcPaymentInfo.cshtml" />
+    <None Include="Themes\Mybags\Views\Checkout\OpcPaymentMethods.cshtml" />
+    <None Include="Themes\Mybags\Views\Checkout\OpcShippingAddress.cshtml" />
+    <None Include="Themes\Mybags\Views\Checkout\OpcShippingMethods.cshtml" />
+    <None Include="Themes\Mybags\Views\Checkout\PaymentInfo.cshtml" />
+    <None Include="Themes\Mybags\Views\Checkout\PaymentMethod.cshtml" />
+    <None Include="Themes\Mybags\Views\Checkout\ShippingAddress.cshtml" />
+    <None Include="Themes\Mybags\Views\Checkout\ShippingMethod.cshtml" />
+    <None Include="Themes\Mybags\Views\Common\AdminHeaderLinks.cshtml" />
+    <None Include="Themes\Mybags\Views\Common\ContactUs.cshtml" />
+    <None Include="Themes\Mybags\Views\Common\ContactVendor.cshtml" />
+    <None Include="Themes\Mybags\Views\Common\CurrencySelector.cshtml" />
+    <None Include="Themes\Mybags\Views\Common\EuCookieLaw.cshtml" />
+    <None Include="Themes\Mybags\Views\Common\Favicon.cshtml" />
+    <None Include="Themes\Mybags\Views\Common\Footer.cshtml" />
+    <None Include="Themes\Mybags\Views\Common\HeaderLinks.cshtml" />
+    <None Include="Themes\Mybags\Views\Common\JavaScriptDisabledWarning.cshtml" />
+    <None Include="Themes\Mybags\Views\Common\LanguageSelector.cshtml" />
+    <None Include="Themes\Mybags\Views\Common\PageNotFound.cshtml" />
+    <None Include="Themes\Mybags\Views\Common\Sitemap.cshtml" />
+    <None Include="Themes\Mybags\Views\Common\Social.cshtml" />
+    <None Include="Themes\Mybags\Views\Common\StoreClosed.cshtml" />
+    <None Include="Themes\Mybags\Views\Common\StoreThemeSelector.cshtml" />
+    <None Include="Themes\Mybags\Views\Common\TaxTypeSelector.cshtml" />
+    <None Include="Themes\Mybags\Views\Customer\AccountActivation.cshtml" />
+    <None Include="Themes\Mybags\Views\Customer\AddressAdd.cshtml" />
+    <None Include="Themes\Mybags\Views\Customer\AddressEdit.cshtml" />
+    <None Include="Themes\Mybags\Views\Customer\Addresses.cshtml" />
+    <None Include="Themes\Mybags\Views\Customer\Avatar.cshtml" />
+    <None Include="Themes\Mybags\Views\Customer\ChangePassword.cshtml" />
+    <None Include="Themes\Mybags\Views\Customer\CustomerNavigation.cshtml" />
+    <None Include="Themes\Mybags\Views\Customer\DownloadableProducts.cshtml" />
+    <None Include="Themes\Mybags\Views\Customer\Info.cshtml" />
+    <None Include="Themes\Mybags\Views\Customer\Login.cshtml" />
+    <None Include="Themes\Mybags\Views\Customer\PasswordRecovery.cshtml" />
+    <None Include="Themes\Mybags\Views\Customer\PasswordRecoveryConfirm.cshtml" />
+    <None Include="Themes\Mybags\Views\Customer\Register.cshtml" />
+    <None Include="Themes\Mybags\Views\Customer\RegisterResult.cshtml" />
+    <None Include="Themes\Mybags\Views\Customer\UserAgreement.cshtml" />
+    <None Include="Themes\Mybags\Views\Customer\_CheckUsernameAvailability.cshtml" />
+    <None Include="Themes\Mybags\Views\Customer\_CustomerAttributes.cshtml" />
+    <None Include="Themes\Mybags\Views\Customer\_ExternalAuthentication.AssociateMessage.cshtml" />
+    <None Include="Themes\Mybags\Views\Customer\_ExternalAuthentication.Errors.cshtml" />
+    <None Include="Themes\Mybags\Views\Home\Index.cshtml" />
+    <None Include="Themes\Mybags\Views\Install\Index.cshtml" />
+    <None Include="Themes\Mybags\Views\Newsletter\NewsletterBox.cshtml" />
+    <None Include="Themes\Mybags\Views\Newsletter\SubscriptionActivation.cshtml" />
+    <None Include="Themes\Mybags\Views\News\HomePageNews.cshtml" />
+    <None Include="Themes\Mybags\Views\News\List.cshtml" />
+    <None Include="Themes\Mybags\Views\News\NewsItem.cshtml" />
+    <None Include="Themes\Mybags\Views\Order\CustomerOrders.cshtml" />
+    <None Include="Themes\Mybags\Views\Order\CustomerRewardPoints.cshtml" />
+    <None Include="Themes\Mybags\Views\Order\Details.cshtml" />
+    <None Include="Themes\Mybags\Views\Order\ShipmentDetails.cshtml" />
+    <None Include="Themes\Mybags\Views\Poll\HomePagePolls.cshtml" />
+    <None Include="Themes\Mybags\Views\Poll\PollBlock.cshtml" />
+    <None Include="Themes\Mybags\Views\Poll\_Poll.cshtml" />
+    <None Include="Themes\Mybags\Views\PrivateMessages\Inbox.cshtml" />
+    <None Include="Themes\Mybags\Views\PrivateMessages\Index.cshtml" />
+    <None Include="Themes\Mybags\Views\PrivateMessages\SendPM.cshtml" />
+    <None Include="Themes\Mybags\Views\PrivateMessages\SentItems.cshtml" />
+    <None Include="Themes\Mybags\Views\PrivateMessages\ViewPM.cshtml" />
+    <None Include="Themes\Mybags\Views\Product\CompareProducts.cshtml" />
+    <None Include="Themes\Mybags\Views\Product\CrossSellProducts.cshtml" />
+    <None Include="Themes\Mybags\Views\Product\HomepageBestSellers.cshtml" />
+    <None Include="Themes\Mybags\Views\Product\HomepageProducts.cshtml" />
+    <None Include="Themes\Mybags\Views\Product\NewProducts.cshtml" />
+    <None Include="Themes\Mybags\Views\Product\ProductEmailAFriend.cshtml" />
+    <None Include="Themes\Mybags\Views\Product\ProductReviews.cshtml" />
+    <None Include="Themes\Mybags\Views\Product\ProductsAlsoPurchased.cshtml" />
+    <None Include="Themes\Mybags\Views\Product\ProductTemplate.Grouped.cshtml" />
+    <None Include="Themes\Mybags\Views\Product\ProductTemplate.Simple.cshtml" />
+    <None Include="Themes\Mybags\Views\Product\RecentlyViewedProducts.cshtml" />
+    <None Include="Themes\Mybags\Views\Product\RecentlyViewedProductsBlock.cshtml" />
+    <None Include="Themes\Mybags\Views\Product\RelatedProducts.cshtml" />
+    <None Include="Themes\Mybags\Views\Product\_AddToCart.cshtml" />
+    <None Include="Themes\Mybags\Views\Product\_AddToWishlist.cshtml" />
+    <None Include="Themes\Mybags\Views\Product\_Availability.cshtml" />
+    <None Include="Themes\Mybags\Views\Product\_BackInStockSubscription.cshtml" />
+    <None Include="Themes\Mybags\Views\Product\_CompareProductsButton.cshtml" />
+    <None Include="Themes\Mybags\Views\Product\_DeliveryInfo.cshtml" />
+    <None Include="Themes\Mybags\Views\Product\_Discontinued.cshtml" />
+    <None Include="Themes\Mybags\Views\Product\_DownloadSample.cshtml" />
+    <None Include="Themes\Mybags\Views\Product\_GiftCardInfo.cshtml" />
+    <None Include="Themes\Mybags\Views\Product\_ProductAttributes.cshtml" />
+    <None Include="Themes\Mybags\Views\Product\_ProductBreadcrumb.cshtml" />
+    <None Include="Themes\Mybags\Views\Product\_ProductDetailsPictures.cshtml" />
+    <None Include="Themes\Mybags\Views\Product\_ProductEmailAFriendButton.cshtml" />
+    <None Include="Themes\Mybags\Views\Product\_ProductManufacturers.cshtml" />
+    <None Include="Themes\Mybags\Views\Product\_ProductPrice.cshtml" />
+    <None Include="Themes\Mybags\Views\Product\_ProductReviewHelpfulness.cshtml" />
+    <None Include="Themes\Mybags\Views\Product\_ProductReviewOverview.cshtml" />
+    <None Include="Themes\Mybags\Views\Product\_ProductSpecifications.cshtml" />
+    <None Include="Themes\Mybags\Views\Product\_ProductTags.cshtml" />
+    <None Include="Themes\Mybags\Views\Product\_ProductTierPrices.cshtml" />
+    <None Include="Themes\Mybags\Views\Product\_RentalInfo.cshtml" />
+    <None Include="Themes\Mybags\Views\Product\_ShareButton.cshtml" />
+    <None Include="Themes\Mybags\Views\Product\_SKU_Man_GTIN_Ven.cshtml" />
+    <None Include="Themes\Mybags\Views\Profile\Index.cshtml" />
+    <None Include="Themes\Mybags\Views\Profile\Info.cshtml" />
+    <None Include="Themes\Mybags\Views\Profile\Posts.cshtml" />
+    <None Include="Themes\Mybags\Views\ReturnRequest\CustomerReturnRequests.cshtml" />
+    <None Include="Themes\Mybags\Views\ReturnRequest\ReturnRequest.cshtml" />
+    <None Include="Themes\Mybags\Views\Shared\Error.cshtml" />
+    <None Include="Themes\Mybags\Views\Shared\Head.cshtml" />
+    <None Include="Themes\Mybags\Views\Shared\Header.cshtml" />
+    <None Include="Themes\Mybags\Views\Shared\LanguageAttributes.cshtml" />
+    <None Include="Themes\Mybags\Views\Shared\OldInternetExplorerWarning.cshtml" />
+    <None Include="Themes\Mybags\Views\Shared\_AddressAttributes.cshtml" />
+    <None Include="Themes\Mybags\Views\Shared\_ColumnsOne.cshtml" />
+    <None Include="Themes\Mybags\Views\Shared\_ColumnsTwo.cshtml" />
+    <None Include="Themes\Mybags\Views\Shared\_CreateOrUpdateAddress.cshtml" />
+    <None Include="Themes\Mybags\Views\Shared\_Notifications.cshtml" />
+    <None Include="Themes\Mybags\Views\Shared\_Print.cshtml" />
+    <None Include="Themes\Mybags\Views\Shared\_ProductBox.cshtml" />
+    <None Include="Themes\Mybags\Views\Shared\_ProductBox_List.cshtml" />
+    <None Include="Themes\Mybags\Views\Shared\_ProductBox_Related.cshtml" />
+    <None Include="Themes\Mybags\Views\Shared\_Root.cshtml" />
+    <None Include="Themes\Mybags\Views\Shared\_Root.Head.cshtml" />
+    <None Include="Themes\Mybags\Views\Shared\_RootPopup.cshtml" />
+    <None Include="Themes\Mybags\Views\ShoppingCart\Cart.cshtml" />
+    <None Include="Themes\Mybags\Views\ShoppingCart\EmailWishlist.cshtml" />
+    <None Include="Themes\Mybags\Views\ShoppingCart\EstimateShipping.cshtml" />
+    <None Include="Themes\Mybags\Views\ShoppingCart\FlyoutShoppingCart.cshtml" />
+    <None Include="Themes\Mybags\Views\ShoppingCart\OrderSummary.cshtml" />
+    <None Include="Themes\Mybags\Views\ShoppingCart\OrderTotals.cshtml" />
+    <None Include="Themes\Mybags\Views\ShoppingCart\Wishlist.cshtml" />
+    <None Include="Themes\Mybags\Views\ShoppingCart\_ButtonPaymentMethod.cshtml" />
+    <None Include="Themes\Mybags\Views\ShoppingCart\_CheckoutAttributes.cshtml" />
+    <None Include="Themes\Mybags\Views\ShoppingCart\_DiscountBox.cshtml" />
+    <None Include="Themes\Mybags\Views\ShoppingCart\_GiftCardBox.cshtml" />
+    <None Include="Themes\Mybags\Views\ShoppingCart\_OrderReviewData.cshtml" />
+    <None Include="Themes\Mybags\Views\Topic\TopicBlock.cshtml" />
+    <None Include="Themes\Mybags\Views\Topic\TopicDetails.cshtml" />
+    <None Include="Themes\Mybags\Views\Vendor\ApplyVendor.cshtml" />
+    <None Include="Themes\Mybags\Views\Vendor\ApplyVendor_old.cshtml" />
+    <None Include="Themes\Mybags\Views\Web.config" />
+    <None Include="Themes\Mybags\Views\_ViewStart.cshtml" />
+
+    <None Update="Areas\Admin\sitemap.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <!-- This target execute after "Build" target.
+    We use it to clean up folder with plugins from unnecessary and obsolete libraries. -->
+  <Target Name="NopTarget" AfterTargets="Build">
+    <ItemGroup>
+      <!-- Get all the libraries from the shadow copy folder to remove them,
+        because depending on the settings, this may not happen when the application is starting,
+        but this can lead to unpredictable results during debugging of the project. -->
+      <ShadowCopiesLibraries Include="$(MSBuildProjectDirectory)\Plugins\bin\*.*" Exclude="$(MSBuildProjectDirectory)\Plugins\bin\placeholder.txt" />
+    </ItemGroup>
+    <!-- Delete libraries from the shadow copy folder -->
+    <Delete Files="@(ShadowCopiesLibraries)" />
+    <!-- When .NET Core builds a project, it copies all referenced libraries to the output folder.
+      For plugins it creates too many unnecessary files that just take up space.
+      At the moment you can't disable this behavior. That's why we have to manually delete all unnecessary libraries from plugin output directories. -->
+    <MSBuild Projects="$(MSBuildProjectDirectory)\..\..\Build\ClearPluginAssemblies.proj" Targets="NopClear" />
+  </Target>
+
+</Project>

@@ -1,0 +1,6 @@
+{
+  "DataProvider": "sqlserver",
+  "DataConnectionString": "Data Source=70.32.28.3;Initial Catalog=intervee_G_Inspired_Management;user id=intervee_ayesha;password=Bebbo0woo;MultipleActiveResultSets=True",
+  //"DataConnectionString": "Data Source=DESKTOP-1MRRGU8;Initial Catalog=G-Inspired;Integrated Security=True;Persist Security Info=False",
+  "RawDataSettings": {}
+}
